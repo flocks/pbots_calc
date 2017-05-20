@@ -28,7 +28,7 @@ pbots_calc library python wrapper.
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print "usage: %s hand1:hand2:hand... [board [dead]]" % sys.argv[0]
+        print(("usage: %s hand1:hand2:hand... [board [dead]]" % sys.argv[0]))
         sys.exit(0)
     board = ""
     dead = ""
@@ -37,6 +37,10 @@ if __name__ == "__main__":
         if len(sys.argv) >=4:
             dead = sys.argv[3]
 
-    r = pbots_calc.calc(sys.argv[1], board, dead, 1000000)
+    board = board.encode('utf-8')
+    dead = dead.encode('utf-8')
+    hands = sys.argv[1].encode('utf-8')
+    r = pbots_calc.calc(hands, board, dead, 1000000)
+    print(r.hands)
     if r:
-        print zip(r.hands, r.ev)
+        print((list(zip(r.hands, r.ev))))
